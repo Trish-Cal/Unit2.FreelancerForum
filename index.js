@@ -1,4 +1,4 @@
-const prcieSpan = document.querySelector("#avg-price");
+const priceSpan = document.querySelector("#avg-price");
 const freelancerList = document.querySelector("#freelancers");
 
 /* State */
@@ -6,21 +6,22 @@ const freelancerList = document.querySelector("#freelancers");
 //We call this data "state" because it represents the state of our program. 
 
 const freelancers = [
-    { name: "Dr. Slice", price: 25, occumpation: "gardener" },
-    { name: "Dr. Pressure", prcie: 51, occumpation: "programmer" },
-    { name: "Prof. Possibility", proce: 43, occumpation: "teacher" },
+    { name: "Dr. Slice", price: 25, occupation: "gardener" },
+    { name: "Dr. Pressure", price: 51, occupation: "programmer" },
+    { name: "Prof. Possibility", price: 43, occupation: "teacher" },
 ];
 
 const names = ["Waldo", "Tony", "Hubert"];
 const occupations = ["ML Engineer", "Lawyer", "Electrician"];
 const prices = [100, 200, 300];
-// const limit = 10;
+const limit = 10;
 
 // remove the interval after 10 added - see the colors project 
 // 'setInterval' will call 'addFreelancer' every 1000 milliseconds (1 second)
 // and return an interval ID that we can use to stop the interval later. 
 //Calling 'clearInterval(addShaepIntervalId)' will stop the interval. 
 const addFreeLancerIntervalId =  setInterval(addFreelancers, 3000);
+clearInterval(addFreeLancerIntervalId.limit);
 
 render(); // We call this function once to render the initial state
 
@@ -31,7 +32,7 @@ render(); // We call this function once to render the initial state
 function render() {
     const listings = freelancers.map((person) => {
         const newListing = document.createElement("li");
-        newListing.innerText = "Name: ${person.name} Occupation: ${person.occupation} Price: $${person.price}";
+        newListing.innerText = `Name: ${person.name} Occupation: ${person.occupation} Price: $${person.price}`;
         return newListing;
     });
     freelancerList.replaceChildren(...listings);
@@ -49,9 +50,11 @@ function addFreelancers() {
         const price = prices[Math.floor(Math.random() * prices.length)];
         const newFreelancer = {name, occupation, price};
     freelancers.push(newFreelancer);
-    const averageRate = freelancers.reduce((total, currentItem) => total += currentItem.price, 
+    const averageRate = freelancers.reduce((total, currentItem)=>total += currentItem.price, 
     0
-) / freelancers.length;
-prcieSpan.innerText = averageRate.toFixed(2)
+)/freelancers.length;
+// console.log(averageRate.toFixed(2));
+// console.log(freelancers);
+priceSpan.innerText = averageRate.toFixed(2);
     render();
 }
